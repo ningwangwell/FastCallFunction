@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">shortCut</string>
+    <string name="CHAT_SEND_MESSAGE">Send</string>
+    <string name="SHORT_CUT">Shortcut</string>
+    <string name="CHAT_INPUT_HINT">Type something here</string>
+    <string name="settings">Settings</string>
+    <string name="delete">Delete</string>
+    <string name="backup">Backup</string>
+</resources>
