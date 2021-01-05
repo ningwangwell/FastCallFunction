@@ -22,15 +22,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 public class ChatActivity : AppCompatActivity() {
+    private val TAG = "ChatActivity"
     private val msgList = ArrayList<ChatMsg>()
     private var msgAdapter: ChatMsgAdapter? = null
     private var mToolbar: Toolbar? = null
-    private val RC_CREATE_SHORTCUT: Int = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chat_view)
         val extraData = intent.getStringExtra("people_name")
         val extraImage = intent.getStringExtra("people_avatar")
+        val extraId = intent.getIntExtra("people_id",0)
         initMsg(extraData.toString())
         val send: Button = findViewById(R.id.send)
         var inputText: EditText = findViewById(R.id.inputText)
@@ -38,7 +40,7 @@ public class ChatActivity : AppCompatActivity() {
         mToolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(mToolbar)
 
-        Log.i("ChatActivity", "extraImage = $extraImage")
+        Log.i(TAG, "people name = $extraData,people avatar = $extraImage,people id =$extraId")
         mToolbar.run {
             title = extraData
         }
