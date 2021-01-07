@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initPeople()
+        initProfile()
         mToolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(mToolbar)
 
@@ -39,11 +40,18 @@ class MainActivity : AppCompatActivity() {
             val data = people.name
             val image = people.avatar.toString()
             val personId = people.personId
+            val company = people.company
+            val email = people.email
+            val position = people.position
             Log.i("MainActivity", "Image = ${people.avatar}")
             val intentActivity = Intent(this, ChatActivity::class.java)
             intentActivity.putExtra("people_name",data)
             intentActivity.putExtra("people_avatar",image)
             intentActivity.putExtra("people_id",personId)
+            intentActivity.putExtra("people_company",company)
+            intentActivity.putExtra("people_email",email)
+            intentActivity.putExtra("people_position",position)
+
             startActivity(intentActivity)
         }
         //长按创建快捷方式
@@ -67,13 +75,22 @@ class MainActivity : AppCompatActivity() {
             peopleList.add(People("Darcy", R.drawable.ic_isolated,++peopleCount))
             peopleList.add(People("Susan", R.drawable.ic_meditation,++peopleCount))
             peopleList.add(People("Ida", R.drawable.ic_domestic_student,++peopleCount))
-            peopleList.add(People("Sally", R.drawable.ic_domestic_student,++peopleCount))
-            peopleList.add(People("Una", R.drawable.ic_domestic_student,++peopleCount))
-            peopleList.add(People("Ella", R.drawable.ic_domestic_student,++peopleCount))
-            peopleList.add(People("Ray", R.drawable.ic_domestic_student,++peopleCount))
-            peopleList.add(People("Liz", R.drawable.ic_domestic_student,++peopleCount))
-            peopleList.add(People("Phil", R.drawable.ic_domestic_student,++peopleCount))
-            peopleList.add(People("Reg", R.drawable.ic_domestic_student,++peopleCount))
+            peopleList.add(People("Sally", R.drawable.box,++peopleCount))
+            peopleList.add(People("Una", R.drawable.earth,++peopleCount))
+            peopleList.add(People("Ella", R.drawable.flower,++peopleCount))
+            peopleList.add(People("Ray", R.drawable.flyer,++peopleCount))
+            peopleList.add(People("Liz", R.drawable.plastic,++peopleCount))
+            peopleList.add(People("Phil", R.drawable.sweet,++peopleCount))
+            peopleList.add(People("Reg", R.drawable.ic_annoyed,++peopleCount))
+        }
+    }
+    private fun initProfile(){
+        for (people in peopleList){
+            if (people.company == null && people.email == null && people.position == null){
+                people.company = "Cisco"
+                people.email = "${people.name}@cisco.com"
+                people.position = "software engineer"
+            }
         }
     }
     private fun createShortcut(activity: Activity, data: String?, image: Int, actionIntent: Intent): Boolean {
@@ -101,6 +118,7 @@ class MainActivity : AppCompatActivity() {
             mShortcutInfoBuilder.setIcon(Icon.createWithResource(this,image))
             val shortcutIntent = Intent(applicationContext, ChatActivity::class.java)
             shortcutIntent.putExtra("people_name", data)
+            shortcutIntent.putExtra("people_avatar",image)
             shortcutIntent.action = Intent.ACTION_CREATE_SHORTCUT
             mShortcutInfoBuilder.setIntent(shortcutIntent)
             val mShortcutInfo = mShortcutInfoBuilder.build()
@@ -116,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.backup -> Toast.makeText(this,"You click Backup", Toast.LENGTH_SHORT).show()
+            R.id.profile -> Toast.makeText(this,"You click Backup", Toast.LENGTH_SHORT).show()
             R.id.delete -> Toast.makeText(this,"You click delete", Toast.LENGTH_SHORT).show()
             R.id.settings -> Toast.makeText(this,"You click settings", Toast.LENGTH_SHORT).show()
 

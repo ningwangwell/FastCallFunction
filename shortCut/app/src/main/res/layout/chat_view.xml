@@ -16,28 +16,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageButton
-            android:id="@+id/shortcut"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:layout_marginLeft="5dp"
-            android:contentDescription="@string/CHAT_SEND_MESSAGE"
-            android:background="@drawable/ic_shortcut_menu"
-            android:layout_marginStart="5dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp">
         <EditText
             android:id="@+id/inputText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:hint="@string/CHAT_INPUT_HINT"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/input_message_background"
             android:maxLines="2"/>
         <Button
             android:id="@+id/send"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="70dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="2dp"
             android:text="@string/CHAT_SEND_MESSAGE"
+            android:textColor="#fff"
             android:background="@drawable/btn_background_send"/>
     </LinearLayout>
 
