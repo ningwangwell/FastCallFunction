@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.IllegalArgumentException
 
-class ChatMsgAdapter(val msgList: List<ChatMsg>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatMsgAdapter(private val msgList: List<ChatMsg>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class LeftViewHolder(view:View):RecyclerView.ViewHolder(view){
         val leftMsg:TextView = view.findViewById(R.id.leftMsg)
     }

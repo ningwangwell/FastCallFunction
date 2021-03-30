@@ -5,14 +5,17 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
-class ProfileActivity: AppCompatActivity(){
-    private var extraData:String? = null
-    private var extraImage:String? = null
-    private var extraId :Int = 0
-    private var extraCompany:String? = null
-    private var extraEmail:String? = null
-    private var extraPosition:String? = null
+class ProfileActivity : AppCompatActivity() {
+    private var extraData: String? = null
+    private var extraImage: String? = null
+    private var extraId: Int = 0
+    private var extraCompany: String? = null
+    private var extraEmail: String? = null
+    private var extraPosition: String? = null
+    private var mToolbar: Toolbar? = null
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +29,7 @@ class ProfileActivity: AppCompatActivity(){
 
         extraData = intent.getStringExtra("people_name")
         extraImage = intent.getStringExtra("people_avatar")
-        extraId = intent.getIntExtra("people_id",0)
+        extraId = intent.getIntExtra("people_id", 0)
         extraCompany = intent.getStringExtra("people_company")
         extraEmail = intent.getStringExtra("people_email")
         extraPosition = intent.getStringExtra("people_position")
@@ -39,7 +42,16 @@ class ProfileActivity: AppCompatActivity(){
         email.text = "email : $extraEmail"
         company.text = "company : $extraCompany"
         position.text = "position : $extraPosition"
+        setupActionBar()
 
     }
 
+    private fun setupActionBar() {
+        mToolbar = findViewById<Toolbar>(R.id.toolbar)
+        mToolbar?.title = "$extraData's Profile"
+        mToolbar?.setNavigationIcon(R.drawable.ic_back)
+        mToolbar?.navigationContentDescription = "cancel"
+        mToolbar?.setNavigationOnClickListener { finish() }
+
+    }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  <item android:drawable="@drawable/ic_backarrow_p_dark" android:state_enabled="true" android:state_pressed="false"/>
+      <item android:drawable="@drawable/ic_backarrow_p_pressed" android:state_enabled="true" android:state_focused="true" android:state_pressed="false"/>
+      <item android:drawable="@drawable/ic_backarrow_p_pressed" android:state_enabled="true" android:state_pressed="true"/>
+      <item android:drawable="@drawable/ic_backarrow_p_disabled" android:state_enabled="false"/>
+      <item android:drawable="@drawable/ic_backarrow_p_dark"/>-->
+
+    <item android:drawable="@drawable/ic_back_24_active_new" android:state_enabled="true" android:state_pressed="false"/>
+    <item android:drawable="@drawable/ic_back_24_pressed_new" android:state_enabled="true" android:state_focused="true" android:state_pressed="false"/>
+    <item android:drawable="@drawable/ic_back_24_pressed_new" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:drawable="@drawable/ic_back_24_disable_new" android:state_enabled="false"/>
+    <item android:drawable="@drawable/ic_back_24_active_new"/>
+
+</selector>

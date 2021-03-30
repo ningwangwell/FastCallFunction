@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menu_chat_call"
+        android:title="call"
+        android:icon="@drawable/ic_call"
+        app:contentDescription="call"
+        app:showAsAction="always|withText"/>
+    <item android:id="@+id/menu_chat_video"
+        android:icon="@drawable/ic_video"
+        app:contentDescription="video"
+        app:showAsAction="always|withText"
+        android:title="video" />
+    <item android:id="@+id/menu_more"
+        app:contentDescription="more"
+        app:showAsAction="never|withText"
+        android:icon="@drawable/ic_profile"
+        android:title="profile" />
+</menu>

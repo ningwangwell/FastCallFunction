@@ -1,20 +1,14 @@
 package com.example.shortcut
 
-import android.app.Activity
-import android.content.ClipData
-import android.content.Context
 import android.content.Intent
-import android.content.pm.ShortcutInfo
-import android.content.pm.ShortcutManager
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Icon
-import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,20 +31,24 @@ public class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.chat_view)
         extraData = intent.getStringExtra("people_name")
         extraImage = intent.getStringExtra("people_avatar")
-        extraId = intent.getIntExtra("people_id",0)
+        extraId = intent.getIntExtra("people_id", 0)
         extraCompany = intent.getStringExtra("people_company")
         extraEmail = intent.getStringExtra("people_email")
         extraPosition = intent.getStringExtra("people_position")
         initMsg(extraData.toString())
         val send: Button = findViewById(R.id.send)
         var inputText: EditText = findViewById(R.id.inputText)
-        mToolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(mToolbar)
-
-        Log.i(TAG, "people name = $extraData,people avatar = $extraImage,people id =$extraId")
-        mToolbar.run {
-            title = extraData
-        }
+        setupActionBar()
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setHomeButtonEnabled(true)
+//
+//        Log.i(TAG, "people name = $extraData,people avatar = $extraImage,people id =$extraId")
+//        mToolbar.run {
+//            title = extraData
+//        }
+//        mToolbar?.setNavigationOnClickListener {
+//            finish();
+//        };
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
@@ -69,7 +67,37 @@ public class ChatActivity : AppCompatActivity() {
 
 
     }
-
+    private fun setupActionBar() {
+        mToolbar = findViewById<Toolbar>(R.id.toolbar)
+        mToolbar?.title = extraData
+        mToolbar?.inflateMenu(R.menu.chat_menu)
+        mToolbar?.setNavigationIcon(R.drawable.ic_back)
+        mToolbar?.navigationContentDescription = "cancel"
+        mToolbar?.setNavigationOnClickListener { finish() }
+        mToolbar?.setOnMenuItemClickListener { menuItem ->
+            if (menuItem.itemId == R.id.menu_chat_call) {
+                val intentActivity = Intent(this, CallActivity::class.java)
+                intentActivity.putExtra("people_name",extraData)
+                intentActivity.putExtra("people_avatar",extraImage)
+                startActivity(intentActivity)
+            }else if (menuItem.itemId == R.id.menu_chat_video){
+                val intentActivity = Intent(this, VideoActivity::class.java)
+                intentActivity.putExtra("people_name",extraData)
+                intentActivity.putExtra("people_avatar",extraImage)
+                startActivity(intentActivity)
+            }else if (menuItem.itemId == R.id.menu_more){
+                val intentActivity = Intent(this, ProfileActivity::class.java)
+                intentActivity.putExtra("people_name",extraData)
+                intentActivity.putExtra("people_avatar",extraImage)
+                intentActivity.putExtra("people_id",extraId)
+                intentActivity.putExtra("people_company",extraCompany)
+                intentActivity.putExtra("people_email",extraEmail)
+                intentActivity.putExtra("people_position",extraPosition)
+                startActivity(intentActivity)
+            }
+            true
+        }
+    }
 
     private fun initMsg(name: String) {
         val msg1 = ChatMsg("Hello guy.", ChatMsg.TYPE_RECEIVED)
@@ -80,6 +108,7 @@ public class ChatActivity : AppCompatActivity() {
         msgList.add(msg3)
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar, menu)
         return true
@@ -87,18 +116,20 @@ public class ChatActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            android.R.id.home -> {
+                val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+            }
             R.id.profile -> {
                 val intentActivity = Intent(this, ProfileActivity::class.java)
-                intentActivity.putExtra("people_name",extraData)
-                intentActivity.putExtra("people_avatar",extraImage)
-                intentActivity.putExtra("people_id",extraId)
-                intentActivity.putExtra("people_company",extraCompany)
-                intentActivity.putExtra("people_email",extraEmail)
-                intentActivity.putExtra("people_position",extraPosition)
+                intentActivity.putExtra("people_name", extraData)
+                intentActivity.putExtra("people_avatar", extraImage)
+                intentActivity.putExtra("people_id", extraId)
+                intentActivity.putExtra("people_company", extraCompany)
+                intentActivity.putExtra("people_email", extraEmail)
+                intentActivity.putExtra("people_position", extraPosition)
                 startActivity(intentActivity)
             }
-
-            R.id.delete -> Toast.makeText(this, "You click delete", Toast.LENGTH_SHORT).show()
             R.id.settings -> Toast.makeText(this, "You click settings", Toast.LENGTH_SHORT).show()
 
         }

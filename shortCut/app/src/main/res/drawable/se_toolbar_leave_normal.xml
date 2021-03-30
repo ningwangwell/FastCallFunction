@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="true" android:state_pressed="false">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <size android:width="48dp" android:height="48dp" />
+                    <solid android:color="@color/float_cancel_normal" />
+                    <stroke android:width="1dp" android:color="@color/float_cancel_border_new"/>
+                </shape>
+            </item>
+            <item>
+                <bitmap android:gravity="center" android:src="@drawable/ic_callcontrols_cancel_p" />
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_enabled="true" android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <size android:width="48dp" android:height="48dp" />
+                    <solid android:color="@color/float_cancel_pressed" />
+                    <stroke android:width="1dp" android:color="@color/float_cancel_border_new"/>
+                </shape>
+            </item>
+            <item>
+                <bitmap android:gravity="center" android:src="@drawable/ic_callcontrols_cancel_p" />
+            </item>
+        </layer-list>
+    </item>
+
+</selector>
